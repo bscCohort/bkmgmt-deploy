@@ -22,7 +22,7 @@ function ShowBookDetails(props) {
 
   const onDeleteClick = (id) => {
     axios
-      .delete(`http://localhost:5000/api/books/api/books/${id}`)
+      .delete(`http://localhost:5000/api/books/${id}`)
       .then((res) => {
         navigate('/');
       })
