@@ -24,7 +24,7 @@ const CreateBook = (props) => {
     e.preventDefault();
 
     axios
-      .post('https://5000-bsccohort-empmgmtcohort-tgprlaafyqj.ws-us90.gitpod.io/api/books', book)
+      .post('http://localhost:5000/api/books', book)
       .then((res) => {
         setBook({
           title: '',

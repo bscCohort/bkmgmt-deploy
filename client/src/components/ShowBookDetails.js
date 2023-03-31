@@ -11,7 +11,7 @@ function ShowBookDetails(props) {
 
   useEffect(() => {
     axios
-      .get(`https://5000-bsccohort-empmgmtcohort-tgprlaafyqj.ws-us90.gitpod.io/api/books/${id}`)
+      .get(`http://localhost:5000/api/books/api/books/${id}`)
       .then((res) => {
         setBook(res.data);
       })
@@ -22,7 +22,7 @@ function ShowBookDetails(props) {
 
   const onDeleteClick = (id) => {
     axios
-      .delete(`https://5000-bsccohort-empmgmtcohort-tgprlaafyqj.ws-us90.gitpod.io/api/books/${id}`)
+      .delete(`http://localhost:5000/api/books/api/books/${id}`)
       .then((res) => {
         navigate('/');
       })

@@ -2,6 +2,7 @@ const express = require("express")
 const connectDB = require("./config/db")
 const cors = require("cors")
 const books = require("./routes/api/books")
+const path = require('path');
 
 const app = express()
 
@@ -19,6 +20,18 @@ app.use(cors({
 app.use(express.json({
     extended: false
 }))
+
+// STATIC FILES
+
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("*", function (_, res) {
+    res.sendFile(
+        path.join(__dirname, "./client/build/index.html"),
+        function (err) {
+            res.status(500).send(err);
+        }
+    );
+});
 
 // Handling Routes
 app.get('/', (req, res) => res.send('Hello world!'));
