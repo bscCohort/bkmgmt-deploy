@@ -18,7 +18,7 @@ function UpdateBookInfo(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/books/api/books/${id}`)
+      .get(`/api/books/${id}`)
       .then((res) => {
         setBook({
           title: res.data.title,
@@ -52,7 +52,7 @@ function UpdateBookInfo(props) {
     };
 
     axios
-      .put(`http://localhost:5000/api/books/api/books/${id}`, data)
+      .put(`/api/books/${id}`, data)
       .then((res) => {
         navigate(`/show-book/${id}`);
       })

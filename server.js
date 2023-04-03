@@ -10,19 +10,14 @@ connectDB().then(() => {
     console.log("Connected to mongodb")
 })
 
-// Calling CORS
-app.use(cors({
-    origin:true,
-    credentials: true
-}))
 
-// Init Middleware
-app.use(express.json({
-    extended: false
-}))
+// HANDLING MIDDLEWARE
+app.use(express.json());
+app.use(cors());
+app.use("/api/books", books)
+
 
 // STATIC FILES
-
 app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", function (_, res) {
     res.sendFile(
@@ -33,13 +28,12 @@ app.get("*", function (_, res) {
     );
 });
 
-// Handling Routes
-// app.get('/', (req, res) => res.send('Hello world!'));
-app.use("/api/books", books)
 
+// STARTING SERVER
 require("dotenv").config( { path: "./config.env" } )
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
 
 
 

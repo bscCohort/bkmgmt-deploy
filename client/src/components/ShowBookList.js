@@ -14,8 +14,8 @@ function ShowBookList() {
         setBooks(res.data);
       })
       .catch((err) => {
-        console.log('Error from ShowBookList');
-        console.error(err)
+        console.log('Error from ShowBookList ->');
+        console.log(err)
       });
   }, []);
 

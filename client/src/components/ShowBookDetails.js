@@ -11,7 +11,7 @@ function ShowBookDetails(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/books/api/books/${id}`)
+      .get(`/api/books/${id}`)
       .then((res) => {
         setBook(res.data);
       })
