@@ -9,13 +9,13 @@ function ShowBookList() {
 
   useEffect(() => {
     axios
-      .get('/api/books')
+      .get(`/api/books`)
       .then((res) => {
         setBooks(res.data);
       })
       .catch((err) => {
         console.log('Error from ShowBookList');
-        console.log(err)
+        console.error(err)
       });
   }, []);
 

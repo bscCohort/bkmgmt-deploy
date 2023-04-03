@@ -23,15 +23,15 @@ app.use(express.json({
 
 // STATIC FILES
 
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", function (_, res) {
-    res.sendFile(
-        path.join(__dirname, "./client/build/index.html"),
-        function (err) {
-            res.status(500).send(err);
-        }
-    );
-});
+// app.use(express.static(path.join(__dirname, "./client/build")));
+// app.get("*", function (_, res) {
+//     res.sendFile(
+//         path.join(__dirname, "./client/build/index.html"),
+//         function (err) {
+//             res.status(500).send(err);
+//         }
+//     );
+// });
 
 // Handling Routes
 app.get('/', (req, res) => res.send('Hello world!'));
