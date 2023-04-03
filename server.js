@@ -3,12 +3,14 @@ const connectDB = require("./config/db")
 const cors = require("cors")
 const books = require("./routes/api/books")
 const path = require('path');
+require("dotenv").config( { path: "./config.env" } )
 
+// CONNECTING TO DB
+connectDB()
+
+// INITIATING APP
 const app = express()
 
-connectDB().then(() => {
-    console.log("Connected to mongodb")
-})
 
 
 // HANDLING MIDDLEWARE
@@ -30,9 +32,8 @@ app.get("*", function (_, res) {
 
 
 // STARTING SERVER
-require("dotenv").config( { path: "./config.env" } )
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => console.log(`Express server running on port ${port}`));
 
 
 

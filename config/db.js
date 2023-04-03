@@ -1,13 +1,13 @@
 const mongoose = require("mongoose")
-const db = "mongodb+srv://bscCohort:Crimsy!2345@cluster0.ws1rq5o.mongodb.net/books?retryWrites=true&w=majority"
-
-
 
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", true)
-    await mongoose.connect(db, {
+    await mongoose.connect(process.env.ATLAS_URL, {
       useNewUrlParser: true,
+    })
+    .then(() => {
+      console.log("Successfully connected to MongoDB Atlas");
     })
   }
   catch (err) {
