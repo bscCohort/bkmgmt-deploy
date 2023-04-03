@@ -34,7 +34,7 @@ app.get("*", function (_, res) {
 });
 
 // Handling Routes
-app.get('/', (req, res) => res.send('Hello world!'));
+// app.get('/', (req, res) => res.send('Hello world!'));
 app.use("/api/books", books)
 
 require("dotenv").config( { path: "./config.env" } )
