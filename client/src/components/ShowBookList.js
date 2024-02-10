@@ -3,6 +3,8 @@ import '../App.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BookCard from './BookCard';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 function ShowBookList() {
   const [books, setBooks] = useState([]);
@@ -26,6 +28,8 @@ function ShowBookList() {
 
   return (
     <div className='ShowBookList'>
+      <Navbar />
+
       <div className='container'>
         <div className='row'>
           <div className='col-md-12'>
@@ -48,6 +52,8 @@ function ShowBookList() {
 
         <div className='list'>{bookList}</div>
       </div>
+
+      <Footer />
     </div>
   );
 }

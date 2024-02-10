@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 function ShowBookDetails(props) {
   const [book, setBook] = useState({});
@@ -72,6 +74,8 @@ function ShowBookDetails(props) {
 
   return (
     <div className='ShowBookDetails'>
+      <Navbar />
+      
       <div className='container'>
         <div className='row'>
           <div className='col-md-10 m-auto'>
@@ -108,6 +112,8 @@ function ShowBookDetails(props) {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }

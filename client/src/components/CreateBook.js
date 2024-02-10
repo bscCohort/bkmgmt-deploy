@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 const CreateBook = (props) => {
   // Define the state with useState hook
@@ -47,6 +49,7 @@ const CreateBook = (props) => {
 
   return (
     <div className='CreateBook'>
+      <Navbar />
       <div className='container'>
         <div className='row'>
           <div className='col-md-8 m-auto'>
@@ -134,6 +137,7 @@ const CreateBook = (props) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
