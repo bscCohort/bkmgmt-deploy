@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../App.css';
 import axios from 'axios';
 import Footer from './Footer';
@@ -7,6 +9,7 @@ import Navbar from './Navbar';
 
 function ShowBookDetails(props) {
   const [book, setBook] = useState({});
+  // const [showToast, setShowToast] = useState(false);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -26,89 +29,132 @@ function ShowBookDetails(props) {
     axios
       .delete(`/api/books/${id}`)
       .then((res) => {
-        navigate('/');
+
+        // Show the success alert
+        toast.success('Book deleted!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+
+        // Delay the navigation slightly to allow the toast to be seen
+        setTimeout(() => {
+          // setShowToast(false); // Hide the toast
+          navigate('/'); // Navigate to homepage
+        }, 5000); // Adjust the timeout as needed
       })
       .catch((err) => {
-        console.log('Error form ShowBookDetails_deleteClick');
+        console.log('Error in CreateBook!');
+        console.log('The error is -> ')
+        console.log(err)
+        // Show the success alert
+        toast.error('Error while deleting the book, please try again!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
       });
   };
-
-  const BookItem = (
-    <div>
-      <table className='table table-hover table-dark'>
-        <tbody>
-          <tr>
-            <th scope='row'>1</th>
-            <td>Title</td>
-            <td>{book.title}</td>
-          </tr>
-          <tr>
-            <th scope='row'>2</th>
-            <td>Author</td>
-            <td>{book.author}</td>
-          </tr>
-          <tr>
-            <th scope='row'>3</th>
-            <td>ISBN</td>
-            <td>{book.isbn}</td>
-          </tr>
-          <tr>
-            <th scope='row'>4</th>
-            <td>Publisher</td>
-            <td>{book.publisher}</td>
-          </tr>
-          <tr>
-            <th scope='row'>5</th>
-            <td>Published Date</td>
-            <td>{book.published_date}</td>
-          </tr>
-          <tr>
-            <th scope='row'>6</th>
-            <td>Description</td>
-            <td>{book.description}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
 
   return (
     <div className='ShowBookDetails'>
       <Navbar />
-      
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Slide}
+      />
+
       <div className='container'>
-        <div className='row'>
-          <div className='col-md-10 m-auto'>
-            <br /> <br />
-            <Link to='/' className='btn btn-outline-warning float-left'>
-              Show Book List
-            </Link>
-          </div>
-          <br />
-          <div className='col-md-8 m-auto'>
+        <div className='row justify-content-center'>
+          <div className='col-md-8'>
             <h1 className='display-4 text-center'>Book's Record</h1>
             <p className='lead text-center'>View Book's Info</p>
             <hr /> <br />
-          </div>
-          <div className='col-md-10 m-auto'>{BookItem}</div>
-          <div className='col-md-4 m-auto'>
-            <button
-              type='button'
-              className='btn btn-outline-danger btn-lg btn-block'
-              onClick={() => {
-                onDeleteClick(book._id);
-              }}
-            >
-              Delete Book
-            </button>
-          </div>
-          <div className='col-md-4 m-auto'>
-            <Link
-              to={`/edit-book/${book._id}`}
-              className='btn btn-outline-info btn-lg btn-block'
-            >
-              Edit Book
-            </Link>
+
+            <div className='row justify-content-center'>
+              <div className='col-md-12'>
+                <table className='table table-striped table-bordered table-dark'>
+                  <tbody>
+                    <tr>
+                      <th scope='row'>Title</th>
+                      <td>{book.title}</td>
+                    </tr>
+                    <tr>
+                      <th scope='row'>Author</th>
+                      <td>{book.author}</td>
+                    </tr>
+                    <tr>
+                      <th scope='row'>ISBN</th>
+                      <td>{book.isbn}</td>
+                    </tr>
+                    <tr>
+                      <th scope='row'>Publisher</th>
+                      <td>{book.publisher}</td>
+                    </tr>
+                    <tr>
+                      <th scope='row'>Published Date</th>
+                      <td>{book.published_date}</td>
+                    </tr>
+                    <tr>
+                      <th scope='row'>Description</th>
+                      <td>{book.description}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className='row justify-content-around mt-3'>
+              <div className='col-md-4'>
+                <button
+                  type='button'
+                  className='btn btn-outline-danger btn-lg btn-block'
+                  onClick={() => {
+                    onDeleteClick(book._id);
+                  }}
+                >
+                  Delete Book
+                </button>
+              </div>
+              <div className='col-md-4'>
+                <Link
+                  to={`/edit-book/${book._id}`}
+                  className='btn btn-outline-info btn-lg btn-block'
+                >
+                  Edit Book
+                </Link>
+              </div>
+              <div className='col-md-4'>
+                <Link to='/' className='btn btn-outline-warning btn-lg btn-block'>
+                  Show Book List
+                </Link>
+              </div>
+            </div>
+
+
+
+
           </div>
         </div>
       </div>

@@ -59,8 +59,6 @@ const CreateBook = (props) => {
           navigate('/'); // Navigate to homepage
         },  5000); // Adjust the timeout as needed
 
-        // Push to /
-        // navigate('/');
       })
       .catch((err) => {
         console.log('Error in CreateBook!');
