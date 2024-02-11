@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
 import { useNavigate } from 'react-router-dom';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import axios from 'axios';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
@@ -17,6 +19,7 @@ const CreateBook = (props) => {
     published_date: '',
     publisher: '',
   });
+  const [showToast, setShowToast] = useState(false);
 
   const onChange = (e) => {
     setBook({ ...book, [e.target.name]: e.target.value });
@@ -37,19 +40,64 @@ const CreateBook = (props) => {
           publisher: '',
         });
 
+        // Show the success alert
+        toast.success('Book added successfully!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+          });
+  
+        // Delay the navigation slightly to allow the toast to be seen
+        setTimeout(() => {
+          setShowToast(false); // Hide the toast
+          navigate('/'); // Navigate to homepage
+        },  5000); // Adjust the timeout as needed
+
         // Push to /
-        navigate('/');
+        // navigate('/');
       })
       .catch((err) => {
         console.log('Error in CreateBook!');
         console.log('The error is -> ')
         console.log(err)
+        // Show the success alert
+        toast.error('Something went wrong, try again!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+          });
       });
-  };
-
-  return (
-    <div className='CreateBook'>
+    };
+    
+    return (
+      <div className='CreateBook'>
       <Navbar />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
+
       <div className='container'>
         <div className='row'>
           <div className='col-md-8 m-auto'>
@@ -137,6 +185,8 @@ const CreateBook = (props) => {
           </div>
         </div>
       </div>
+
+
       <Footer />
     </div>
   );
