@@ -37,6 +37,10 @@
   }
 }
 
+body {
+  font-family: "Space Mono", monospace;
+}
+
 .CreateBook {
   background-color: black;
   min-height: 100vh;
