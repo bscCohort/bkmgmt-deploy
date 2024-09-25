@@ -131,6 +131,7 @@ const CreateBook = (props) => {
                   onChange={onChange}
                 />
               </div>
+              <br />
 
               <div className='form-group'>
                 <input
@@ -142,6 +143,7 @@ const CreateBook = (props) => {
                   onChange={onChange}
                 />
               </div>
+              <br />
 
               <div className='form-group'>
                 <input
@@ -153,6 +155,7 @@ const CreateBook = (props) => {
                   onChange={onChange}
                 />
               </div>
+              <br />
 
               <div className='form-group'>
                 <input
@@ -164,6 +167,8 @@ const CreateBook = (props) => {
                   onChange={onChange}
                 />
               </div>
+              <br />
+                    
               <div className='form-group'>
                 <input
                   type='text'
@@ -174,6 +179,7 @@ const CreateBook = (props) => {
                   onChange={onChange}
                 />
               </div>
+              <br />
 
               <input
                 type='submit'
