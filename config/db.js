@@ -12,7 +12,8 @@ const connectDB = async () => {
   }
   catch (err) {
     console.error(err.message)
-    process.exit(1)
+    console.log("FIX THE DB CONNECTIVITY CODE OR MONGODB URL/USERNAME/PASSWORD!!!")
+    // process.exit(1)
   }
 }
 
