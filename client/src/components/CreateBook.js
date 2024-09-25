@@ -5,11 +5,8 @@ import { Slide, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
-import Footer from './Footer';
-import Navbar from './Navbar';
 
 const CreateBook = (props) => {
-  // Define the state with useState hook
   const navigate = useNavigate();
   const [book, setBook] = useState({
     title: '',
@@ -51,13 +48,13 @@ const CreateBook = (props) => {
           progress: undefined,
           theme: "dark",
           transition: Slide,
-          });
-  
+        });
+
         // Delay the navigation slightly to allow the toast to be seen
         setTimeout(() => {
           setShowToast(false); // Hide the toast
           navigate('/'); // Navigate to homepage
-        },  5000); // Adjust the timeout as needed
+        }, 5000); // Adjust the timeout as needed
 
       })
       .catch((err) => {
@@ -75,13 +72,13 @@ const CreateBook = (props) => {
           progress: undefined,
           theme: "dark",
           transition: Slide,
-          });
+        });
       });
-    };
-    
-    return (
-      <div className='CreateBook'>
-      <Navbar />
+  };
+
+  return (
+    <div className='CreateBook'>
+      {/* <Navbar /> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -168,7 +165,7 @@ const CreateBook = (props) => {
                 />
               </div>
               <br />
-                    
+
               <div className='form-group'>
                 <input
                   type='text'
@@ -191,7 +188,6 @@ const CreateBook = (props) => {
       </div>
 
 
-      <Footer />
     </div>
   );
 };

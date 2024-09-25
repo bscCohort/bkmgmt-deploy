@@ -1,10 +1,10 @@
+// src/components/ShowBookList.js
 import React, { useState, useEffect } from 'react';
-import '../App.css';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Button, Typography, Container, Grid } from '@mui/material';
+
 import BookCard from './BookCard';
-import Navbar from './Navbar';
-import Footer from './Footer';
 
 function ShowBookList() {
   const [books, setBooks] = useState([]);
@@ -17,44 +17,41 @@ function ShowBookList() {
       })
       .catch((err) => {
         console.log('Error from ShowBookList ->');
-        console.log(err)
+        console.log(err);
       });
   }, []);
 
-  const bookList =
-    books.length === 0
-      ? 'there is no book record!'
-      : books.map((book, k) => <BookCard book={book} key={k} />);
-
   return (
-    <div className='ShowBookList'>
-      <Navbar />
+    <Container maxWidth="lg">
 
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-12'>
-            <br />
-            <h2 className='display-4 text-center'>Books List</h2>
-          </div>
+      <Typography variant="h3" component="h1" color="primary" gutterBottom>
+        Books List
+      </Typography>
 
-          <div className='col-md-11'>
-            <Link
-              to='/create-book'
-              className='btn btn-outline-warning float-right'
-            >
-              + Add New Book
-            </Link>
-            <br />
-            <br />
-            <hr />
-          </div>
-        </div>
+      <Button
+        component={Link}
+        to="/create-book"
+        color="primary"
+        variant="contained"
+        sx={{ mb: 4 }}
+      >
+        Add New Book
+      </Button>
 
-        <div className='list'>{bookList}</div>
-      </div>
+      <Grid container spacing={3}>
+        {books.length === 0 ? (
+          <Typography>No books found!</Typography>
+        ) : (
+          books.map((book, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <BookCard book={book} />
+            </Grid>
+          ))
+        )}
+      </Grid>
+      
 
-      <Footer />
-    </div>
+    </Container>
   );
 }
 
