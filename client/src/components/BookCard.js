@@ -19,7 +19,7 @@ const BookCard = ({ book }) => {
       <CardMedia
         component="img"
         height="200"
-        image={book.image} // Keep the same image URL
+        image="https://images.unsplash.com/photo-1495446815901-a7297e633e8d"
         alt={book.title}
       />
       <CardContent>
