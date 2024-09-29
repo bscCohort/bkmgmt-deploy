@@ -8,10 +8,11 @@ import rosePineTheme from './theme/rosepine';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CreateBook from './components/CreateBook';
-import ShowBookList from './components/ShowBookList';
+import ShowBookList from './components/ShowBookList'; // Ensure this is imported
 import ShowBookDetails from './components/ShowBookDetails';
 import UpdateBookInfo from './components/UpdateBookInfo';
 import About from './components/About';
+import HomePage from './components/HomePage'; // Import the HomePage component
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
           <Navbar />
           <Box component="main" flexGrow={1} py={3}>
             <Routes>
-              <Route exact path='/' element={<ShowBookList />} />
+              <Route exact path='/' element={<HomePage />} /> {/* Route for HomePage */}
+              <Route path='/books' element={<ShowBookList />} /> {/* Route for ShowBookList */}
               <Route path='/about' element={<About />} />
               <Route path='/create-book' element={<CreateBook />} />
               <Route path='/edit-book/:id' element={<UpdateBookInfo />} />

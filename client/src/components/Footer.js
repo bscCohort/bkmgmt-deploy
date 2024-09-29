@@ -7,12 +7,18 @@ const Footer = () => (
     component="footer" 
     sx={{
       bgcolor: 'background.paper',
-      py: 2,
+      color: 'text.secondary',
+      py: 4,
       width: '100%',
+      textAlign: 'center',
+      borderTop: `1px solid ${theme => theme.palette.primary.main}`, // Optional: add a top border
     }}
   >
-    <Typography variant="body2" color="text.secondary" align="center">
-      Built with ❤️️ By Asutosh Panda For Bsc Cohort | © 2024 Copyright
+    <Typography variant="h6" gutterBottom>
+      Built with ❤️ by Asutosh Panda
+    </Typography>
+    <Typography variant="body2" sx={{ mt: 2 }}>
+      © {new Date().getFullYear()} Bsc Cohort | All Rights Reserved
     </Typography>
   </Box>
 );

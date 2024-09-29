@@ -1,30 +1,51 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import '../App.css'
+// src/components/BookCard.js
+import React from 'react';
+import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const BookCard = (props) => {
-  const book = props.book
-
-
-
+const BookCard = ({ book }) => {
   return (
-    <div className='card-container'>
-      <img
-        src='https://images.unsplash.com/photo-1495446815901-a7297e633e8d'
-        alt='Books'
-        height={200}
+    <Card
+      sx={{
+        transition: 'transform 0.2s, box-shadow 0.2s',
+        borderRadius: 2,
+        boxShadow: 3,
+        '&:hover': {
+          transform: 'scale(1.05)',
+          boxShadow: 6,
+        },
+      }}
+    >
+      <CardMedia
+        component="img"
+        height="200"
+        image={book.image} // Keep the same image URL
+        alt={book.title}
       />
-      <div className='desc'>
-        <h2>
-          <Link to={ `/show-book/${book._id}` }>
-            {book.title}  
-          </Link> 
-        </h2>
-        <h3>{book.author}</h3>
-        <p>{book.description}</p>
-      </div>
-    </div>  
-  )
-}
+      <CardContent>
+        <Typography variant="h5" component="div" color="primary" gutterBottom>
+          {book.title}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary">
+          {book.author} {/* Assuming 'author' is a property of the book */}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+          {book.description} {/* Assuming 'description' is a property of the book */}
+        </Typography>
+        <Box display="flex" justifyContent="flex-end" mt={2}>
+          <Button
+            component={Link}
+            to={`/show-book/${book.id}`} // Assuming 'id' is a property of the book
+            variant="contained"
+            color="primary"
+            size="small"
+          >
+            View Details
+          </Button>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
 
-export default BookCard
+export default BookCard;
