@@ -5,21 +5,21 @@ const books = require("./routes/api/books")
 const path = require('path');
 require("dotenv").config( { path: "./config.env" } )
 
-// CONNECTING TO DB
+// CONNECT TO DB
 connectDB()
 
-// INITIATING APP
+// INITIATE APP
 const app = express()
 
 
 
-// HANDLING MIDDLEWARE
+// HANDLE MIDDLEWARE
 app.use(express.json());
 app.use(cors());
 app.use("/api/books", books)
 
 
-// STATIC FILES
+// SERVE STATIC FILES
 app.use(express.static(path.join(__dirname, "./client/build")));
 app.get("*", function (_, res) {
     res.sendFile(
@@ -31,12 +31,6 @@ app.get("*", function (_, res) {
 });
 
 
-// STARTING SERVER
+// START SERVER
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Express server running on port ${port}`));
-
-
-
-
-
-

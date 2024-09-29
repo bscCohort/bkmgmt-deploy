@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../App.css';
-import Navbar from './Navbar';
-import Footer from './Footer';
 
 function UpdateBookInfo(props) {
   const [book, setBook] = useState({
@@ -66,7 +63,6 @@ function UpdateBookInfo(props) {
 
   return (
     <div className='UpdateBookInfo'>
-      <Navbar />
       
       <div className='container'>
         <div className='row'>
@@ -173,7 +169,6 @@ function UpdateBookInfo(props) {
         </div>
       </div>
 
-      <Footer />
     </div>
   );
 }

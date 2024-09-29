@@ -29,9 +29,9 @@ const Navbar = () => {
           >
             <GitHubIcon />
           </IconButton>
-          <Button color="primary" component={RouterLink} to="/about">
+          {/* <Button color="primary" component={RouterLink} to="/about">
             About
-          </Button>
+          </Button> */}
         </Box>
       </Toolbar>
     </AppBar>

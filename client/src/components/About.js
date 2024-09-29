@@ -1,41 +1,52 @@
 // src/components/About.js
-import React, { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-import axios from 'axios';
-import { Container, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Container, Typography, Box, TextField, Button } from '@mui/material';
 
 const About = () => {
-    const [about, setAbout] = useState('');
+    const [notes, setNotes] = useState([]);
 
-    useEffect(() => {
-        // Fetch the Markdown file from the public folder
-        axios.get('/About.md')
-            .then(response => {
-                setAbout(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching About content:', error);
-                setAbout('# Error\nFailed to load About content. Please try again later.');
-            });
-    }, []);
+    const addNote = (noteText) => {
+        const newNote = {
+            id: Date.now(),
+            text: noteText,
+            timestamp: new Date().toLocaleString()
+        };
+        setNotes([...notes, newNote]);
+    };
+
+    const deleteNote = (id) => {
+        setNotes(notes.filter(note => note.id !== id));
+    };
 
     return (
         <Container maxWidth="md">
             <Box my={4}>
                 <Typography variant="h2" component="h1" gutterBottom>
-                    About
+                    Notes for Teaching CRUD App in MERN
                 </Typography>
-                <ReactMarkdown
-                    components={{
-                        h1: ({ node, ...props }) => <Typography variant="h3" gutterBottom {...props} />,
-                        h2: ({ node, ...props }) => <Typography variant="h4" gutterBottom {...props} />,
-                        h3: ({ node, ...props }) => <Typography variant="h5" gutterBottom {...props} />,
-                        p: ({ node, ...props }) => <Typography paragraph {...props} />,
-                        a: ({ node, ...props }) => <Typography component="a" color="primary" {...props} />,
-                    }}
-                >
-                    {about}
-                </ReactMarkdown>
+
+                {/* Note input area */}
+                <Box mb={2}>
+                    <TextField
+                        multiline
+                        rows={4}
+                        label="Enter your notes"
+                        variant="outlined"
+                        fullWidth
+                        onChange={(e) => addNote(e.target.value)}
+                    />
+                </Box>
+
+                {/* Display notes */}
+                {notes.map((note) => (
+                    <Box key={note.id} mb={2} p={2} border={1} borderRadius={4}>
+                        <Typography variant="body1">{note.text}</Typography>
+                        <Typography variant="caption" color="textSecondary">
+                            Added: {note.timestamp}
+                        </Typography>
+                        <Button size="small" onClick={() => deleteNote(note.id)} color="error">Delete</Button>
+                    </Box>
+                ))}
             </Box>
         </Container>
     );

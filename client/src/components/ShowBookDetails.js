@@ -1,16 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { Slide, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import '../App.css';
+import { useParams, Link as RouterLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Footer from './Footer';
-import Navbar from './Navbar';
+import {
+  Container,
+  Paper,
+  Typography,
+  Grid,
+  Button,
+  Card,
+  CardMedia,
+  Divider,
+  Box,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 
-function ShowBookDetails(props) {
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4),
+  marginTop: theme.spacing(4),
+  marginBottom: theme.spacing(4),
+  backgroundColor: theme.palette.background.paper,
+  boxShadow: theme.shadows[3],
+}));
+
+const ShowBookDetails = () => {
   const [book, setBook] = useState({});
-  // const [showToast, setShowToast] = useState(false);
-
+  const [openDialog, setOpenDialog] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -25,143 +43,118 @@ function ShowBookDetails(props) {
       });
   }, [id]);
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = () => {
+    setOpenDialog(true);
+  };
+
+  const handleDeleteConfirm = () => {
     axios
       .delete(`/api/books/${id}`)
       .then((res) => {
-
-        // Show the success alert
-        toast.success('Book deleted!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Slide,
-        });
-
-        // Delay the navigation slightly to allow the toast to be seen
-        setTimeout(() => {
-          // setShowToast(false); // Hide the toast
-          navigate('/'); // Navigate to homepage
-        }, 5000); // Adjust the timeout as needed
+        navigate('/book-list');
       })
       .catch((err) => {
-        console.log('Error in CreateBook!');
-        console.log('The error is -> ')
-        console.log(err)
-        // Show the success alert
-        toast.error('Error while deleting the book, please try again!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          transition: Slide,
-        });
+        console.log('Error from ShowBookDetails_deleteClick');
       });
+    setOpenDialog(false);
+  };
+
+  const handleDeleteCancel = () => {
+    setOpenDialog(false);
   };
 
   return (
-    <div className='ShowBookDetails'>
-      <Navbar />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        transition={Slide}
-      />
+    <Container maxWidth="md">
+      <StyledPaper>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={4}>
+            <Card>
+              <CardMedia
+                component="img"
+                height="300"
+                image="https://images.unsplash.com/photo-1495446815901-a7297e633e8d"
+                alt={book.title}
+              />
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Typography variant="h4" component="h1" gutterBottom>
+              {book.title}
+            </Typography>
+            <Typography variant="h6" color="textSecondary" gutterBottom>
+              by {book.author}
+            </Typography>
+            <Divider sx={{ my: 2 }} />
+            
+            {/* Display book details one after another */}
+            <Box display="flex" flexDirection="column">
+              <Typography variant="body1" paragraph>
+                {book.description}
+              </Typography>
+              <Typography variant="body1">ISBN: {book.isbn}</Typography>
+              <Typography variant="body1">Published: {book.published_date}</Typography>
+              <Typography variant="body1">Publisher: {book.publisher}</Typography>
+            </Box>
 
-      <div className='container'>
-        <div className='row justify-content-center'>
-          <div className='col-md-8'>
-            <h1 className='display-4 text-center'>Book's Record</h1>
-            <p className='lead text-center'>View Book's Info</p>
-            <hr /> <br />
+          </Grid>
+        </Grid>
+        
+        <Box mt={4} display="flex" justifyContent="space-between">
+          <Button
+            startIcon={<ArrowBackIcon />}
+            component={RouterLink}
+            to="/book-list"
+            variant="outlined"
+          >
+            Back to Book List
+          </Button>
+          <Box>
+            <Button
+              startIcon={<EditIcon />}
+              component={RouterLink}
+              to={`/edit-book/${book._id}`}
+              variant="contained"
+              color="primary"
+              sx={{ mr: 1 }}
+            >
+              Edit Book
+            </Button>
+            <Button
+              startIcon={<DeleteIcon />}
+              onClick={onDeleteClick}
+              variant="contained"
+              color="error"
+            >
+              Delete Book
+            </Button>
+          </Box>
+        </Box>
+      </StyledPaper>
 
-            <div className='row justify-content-center'>
-              <div className='col-md-12'>
-                <table className='table table-striped table-bordered table-dark'>
-                  <tbody>
-                    <tr>
-                      <th scope='row'>Title</th>
-                      <td>{book.title}</td>
-                    </tr>
-                    <tr>
-                      <th scope='row'>Author</th>
-                      <td>{book.author}</td>
-                    </tr>
-                    <tr>
-                      <th scope='row'>ISBN</th>
-                      <td>{book.isbn}</td>
-                    </tr>
-                    <tr>
-                      <th scope='row'>Publisher</th>
-                      <td>{book.publisher}</td>
-                    </tr>
-                    <tr>
-                      <th scope='row'>Published Date</th>
-                      <td>{book.published_date}</td>
-                    </tr>
-                    <tr>
-                      <th scope='row'>Description</th>
-                      <td>{book.description}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className='row justify-content-around mt-3'>
-              <div className='col-md-4'>
-                <button
-                  type='button'
-                  className='btn btn-outline-danger btn-lg btn-block'
-                  onClick={() => {
-                    onDeleteClick(book._id);
-                  }}
-                >
-                  Delete Book
-                </button>
-              </div>
-              <div className='col-md-4'>
-                <Link
-                  to={`/edit-book/${book._id}`}
-                  className='btn btn-outline-info btn-lg btn-block'
-                >
-                  Edit Book
-                </Link>
-              </div>
-              <div className='col-md-4'>
-                <Link to='/' className='btn btn-outline-warning btn-lg btn-block'>
-                  Show Book List
-                </Link>
-              </div>
-            </div>
-
-
-
-
-          </div>
-        </div>
-      </div>
-
-      <Footer />
-    </div>
+      {/* Keep the dialog unchanged */}
+      <Dialog
+        open={openDialog}
+        onClose={handleDeleteCancel}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this book? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteCancel} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="error" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Container>
   );
-}
+};
 
 export default ShowBookDetails;
