@@ -27,12 +27,6 @@ router.get('/:id', async (req, res) => {
 
 // POST /api/books
 router.post('/', async (req, res) => {
-  const { errors, isValid } = validateBookInput(req.body);
-
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
   try {
     const newBook = await Book.create(req.body);
     res.status(201).json(newBook);
@@ -43,12 +37,6 @@ router.post('/', async (req, res) => {
 
 // PUT /api/books/:id
 router.put('/:id', async (req, res) => {
-  const { errors, isValid } = validateBookInput(req.body);
-
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
   try {
     const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedBook) {
