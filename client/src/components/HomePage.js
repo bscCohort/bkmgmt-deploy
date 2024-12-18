@@ -1,13 +1,13 @@
 // src/components/HomePage.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Container, 
-  Typography, 
-  Button, 
-  Box, 
-  Grid, 
-  Card, 
+import {
+  Container,
+  Typography,
+  Button,
+  Box,
+  Grid,
+  Card,
   CardContent,
   Fade,
   CircularProgress,
@@ -20,6 +20,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import QrCodeIcon from '@mui/icons-material/QrCode';
+import SearchIcon from '@mui/icons-material/Search';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import NotesIcon from '@mui/icons-material/Notes';
 import axios from 'axios';
@@ -37,7 +38,7 @@ const HomePage = () => {
       .then(res => {
         const books = res.data;
         const uniqueAuthors = new Set(books.map(book => book.author)).size;
-        const recentBook = books.sort((a, b) => 
+        const recentBook = books.sort((a, b) =>
           new Date(b.published_date) - new Date(a.published_date)
         )[0];
 
@@ -126,7 +127,7 @@ const HomePage = () => {
             Available Features
           </Typography>
         </Box>
-        
+
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12} sm={6} md={4}>
             <Button
@@ -141,6 +142,7 @@ const HomePage = () => {
               View Books
             </Button>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4}>
             <Button
               component={Link}
@@ -154,6 +156,7 @@ const HomePage = () => {
               Add New Book
             </Button>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4}>
             <Button
               component={Link}
@@ -167,6 +170,7 @@ const HomePage = () => {
               Export Data
             </Button>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4}>
             <Button
               component={Link}
@@ -180,6 +184,7 @@ const HomePage = () => {
               QR Codes
             </Button>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4}>
             <Button
               component={Link}
@@ -193,6 +198,7 @@ const HomePage = () => {
               Notes
             </Button>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4}>
             <Button
               component="a"
@@ -208,6 +214,21 @@ const HomePage = () => {
               GitHub
             </Button>
           </Grid>
+
+          <Grid item xs={12} sm={6} md={4}>
+            <Button
+              component={Link}
+              to="/search"
+              variant="contained"
+              size="large"
+              startIcon={<SearchIcon />}
+              fullWidth
+              sx={{ py: 2 }}
+            >
+              Search Books
+            </Button>
+          </Grid>
+
         </Grid>
       </Container>
     </Fade>

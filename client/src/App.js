@@ -15,6 +15,7 @@ import HomePage from './components/HomePage';
 import NotesPage from './components/NotesPage'; // Import NotesPage component
 import ExportPage from './components/ExportPage';
 import QRCodePage from './components/QRCodePage';
+import SearchBooks from './components/SearchBooks';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
               <Route path='/notes/*' element={<NotesPage />} />
               <Route path="/export" element={<ExportPage />} />
               <Route path="/qr-codes" element={<QRCodePage />} />
+              <Route path="/search" element={<SearchBooks />} />
             </Routes>
           </Box>
           <Footer />
