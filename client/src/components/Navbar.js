@@ -13,6 +13,7 @@ import {
 import GitHubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';
 import DownloadIcon from '@mui/icons-material/Download';
+import QrCodeIcon from '@mui/icons-material/QrCode';
 import MenuBookIcon from '@mui/icons-material/MenuBook'; // Added Notes icon
 
 const notesPages = [
@@ -46,6 +47,7 @@ const Navbar = () => {
           >
             Home
           </Button>
+
           <Button
             color="primary"
             onClick={handleNotesClick}
@@ -53,6 +55,7 @@ const Navbar = () => {
           >
             Notes
           </Button>
+
           <Button
             color="primary"
             component={RouterLink}
@@ -61,6 +64,16 @@ const Navbar = () => {
           >
             Export
           </Button>
+          
+          <Button
+            color="primary"
+            component={RouterLink}
+            to="/qr-codes"
+            startIcon={<QrCodeIcon />}
+          >
+            QR Codes
+          </Button>
+
           <Menu
             anchorEl={notesAnchorEl}
             open={Boolean(notesAnchorEl)}
