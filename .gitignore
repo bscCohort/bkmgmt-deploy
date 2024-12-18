@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# ATLAS_URL=mongodb+srv://bsc-cohort-admin:bsc-cohort-admin@cluster0.uzd02mn.mongodb.net/books?retryWrites=true&w=majority&appName=Cluster0
+# PORT=5000
+
+# ATLAS_URL=${ATLAS_URL}
+# PORT=${PORT}

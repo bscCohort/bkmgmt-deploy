@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import HomeIcon from '@mui/icons-material/Home';
+import DownloadIcon from '@mui/icons-material/Download';
 import MenuBookIcon from '@mui/icons-material/MenuBook'; // Added Notes icon
 
 const notesPages = [
@@ -52,6 +53,14 @@ const Navbar = () => {
           >
             Notes
           </Button>
+          <Button
+            color="primary"
+            component={RouterLink}
+            to="/export"
+            startIcon={<DownloadIcon />}
+          >
+            Export
+          </Button>
           <Menu
             anchorEl={notesAnchorEl}
             open={Boolean(notesAnchorEl)}
@@ -78,6 +87,7 @@ const Navbar = () => {
           >
             <GitHubIcon />
           </IconButton>
+          
         </Box>
       </Toolbar>
     </AppBar>
