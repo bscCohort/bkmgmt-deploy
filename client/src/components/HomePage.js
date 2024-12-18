@@ -10,7 +10,8 @@ import {
   Card, 
   CardContent,
   Fade,
-  CircularProgress
+  CircularProgress,
+  Divider
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
@@ -18,6 +19,9 @@ import DownloadIcon from '@mui/icons-material/Download';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import QrCodeIcon from '@mui/icons-material/QrCode';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import NotesIcon from '@mui/icons-material/Notes';
 import axios from 'axios';
 
 const HomePage = () => {
@@ -116,28 +120,15 @@ const HomePage = () => {
           </Grid>
         </Grid>
 
-        {/* Quick Actions */}
+        {/* Features Section */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
           <Typography variant="h5" gutterBottom color="primary">
-            Quick Actions
+            Available Features
           </Typography>
         </Box>
         
         <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} sm={6} md={3}>
-            <Button
-              component={Link}
-              to="/create-book"
-              variant="contained"
-              size="large"
-              startIcon={<AddIcon />}
-              fullWidth
-              sx={{ py: 2 }}
-            >
-              Add New Book
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <Button
               component={Link}
               to="/book-list"
@@ -150,7 +141,20 @@ const HomePage = () => {
               View Books
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Button
+              component={Link}
+              to="/create-book"
+              variant="contained"
+              size="large"
+              startIcon={<AddIcon />}
+              fullWidth
+              sx={{ py: 2 }}
+            >
+              Add New Book
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
             <Button
               component={Link}
               to="/export"
@@ -161,6 +165,47 @@ const HomePage = () => {
               sx={{ py: 2 }}
             >
               Export Data
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Button
+              component={Link}
+              to="/qr-codes"
+              variant="contained"
+              size="large"
+              startIcon={<QrCodeIcon />}
+              fullWidth
+              sx={{ py: 2 }}
+            >
+              QR Codes
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Button
+              component={Link}
+              to="/notes/home"
+              variant="contained"
+              size="large"
+              startIcon={<NotesIcon />}
+              fullWidth
+              sx={{ py: 2 }}
+            >
+              Notes
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Button
+              component="a"
+              href="https://github.com/bscCohort/bkmgmt-deploy"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="contained"
+              size="large"
+              startIcon={<GitHubIcon />}
+              fullWidth
+              sx={{ py: 2 }}
+            >
+              GitHub
             </Button>
           </Grid>
         </Grid>
